@@ -27,10 +27,15 @@ is insufficient for fraud detection and confirming the
 need for multi-feature ML approaches.
 
 ## Project Phases
-- [x] Phase 1 — NumPy EDA and anomaly detection
-- [ ] Phase 2 — Pandas EDA and visualization
-- [ ] Phase 3 — ML models (Logistic Regression, Random Forest, XGBoost)
-- [ ] Phase 4 — Results write-up and paper draft
+- [x] Phase 1 — NumPy baseline (IEEE-CIS dataset)
+- [x] Phase 1 — EDA on Elliptic Bitcoin Dataset
+      - 7 key research findings documented
+      - Fraud rate: 9.76%
+      - Network features identified as strongest signals
+      - Class imbalance confirmed (9.2:1 ratio)
+- [ ] Phase 2 — Visualization
+- [ ] Phase 3 — ML Models
+- [ ] Phase 4 — Results write-up
 
 ## Tools
 Python, NumPy, Pandas, Matplotlib, Scikit-learn
