@@ -37,7 +37,9 @@ DOI: 10.1007/978-981-95-1357-4_38
 
 ### Phase 1 — EDA Findings (Elliptic Bitcoin Dataset)
 - **Finding 1:** Bitcoin fraud rate = 9.76% 
-  (4x higher than e-commerce at 2.65%)
+  among Elliptic labeled transactions
+  (reflects fraud prevalence in investigated
+  suspicious Bitcoin transaction clusters)
 - **Finding 2:** Fraud increases 3x over time 
   (17 illicit at step 1 → 56 at step 49)
 - **Finding 3:** All 165 features differ between 
@@ -50,9 +52,10 @@ DOI: 10.1007/978-981-95-1357-4_38
 - **Finding 7:** 9.2:1 class imbalance — standard 
   accuracy is misleading, AUC-ROC required
 
-### Baseline Finding (IEEE-CIS Dataset)
-- Simple threshold catches only 5.3% of fraud
-- Confirms multi-feature ML approaches are essential
+### Baseline Analysis (IEEE-CIS Dataset)
+- Used for methodology validation only
+- Different domain (e-commerce vs cryptocurrency)
+- Not directly comparable to Elliptic findings
 
 ## Project Phases
 - [x] Phase 1 — Baseline analysis (IEEE-CIS dataset)
