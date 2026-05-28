@@ -17,14 +17,14 @@ np.random.seed(RANDOM_STATE)
 print("Loading files...")
 
 df_features = pd.read_csv(
-    r'C:\Users\abdul\Downloads\elliptic_bitcoin_dataset\elliptic_txs_features.csv',
+    r"C:\Users\abdul\Downloads\New folder(p)\elliptic_txs_features.csv",
     header=None)
 
 df_classes = pd.read_csv(
-    r'C:\Users\abdul\Downloads\elliptic_bitcoin_dataset\elliptic_txs_classes.csv')
+    r"C:\Users\abdul\Downloads\New folder(p)\elliptic_txs_classes.csv")
 
 df_edges = pd.read_csv(
-    r'C:\Users\abdul\Downloads\elliptic_bitcoin_dataset\elliptic_txs_edgelist.csv')
+    r"C:\Users\abdul\Downloads\New folder(p)\elliptic_txs_edgelist.csv")
 
 print("Files loaded successfully!")
 
