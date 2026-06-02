@@ -57,11 +57,14 @@ transactions (4,545 illicit out of 46,564 labeled).
 This reflects fraud prevalence in transactions 
 investigated by Elliptic analysts.
 
-Finding 2: Normalized fraud rate increases 14.9x 
-over time, from 0.79% at time step 1 to 11.76% 
-at time step 49. This confirms that fraud patterns 
-escalate dramatically and models need continuous 
-retraining.
+Finding 2: Illicit transaction rates exhibit high 
+temporal volatility across 49 time steps, ranging 
+from 0.28% to 35.97% (mean 11.35%, std 9.49%). 
+The peak occurs at step 13 (35.97%) with no stable 
+baseline detected. This volatility confirms that 
+fraud patterns are unpredictable and adaptive 
+detection systems with continuous model retraining 
+are required.
 
 Finding 3: 141 out of 165 features show statistically 
 significant differences between illicit and licit 
