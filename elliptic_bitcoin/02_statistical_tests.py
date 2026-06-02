@@ -60,6 +60,10 @@ def statistical_test(illicit, licit, feature):
         become statistically significant.
         Cohen's d is therefore the more important
         measure of practical significance.
+
+        Uses corrected pooled standard deviation
+        with ddof=1 (Bessel's correction), which
+        is the standard formula in published research.
     """
     illicit_vals = illicit[feature].dropna()
     licit_vals   = licit[feature].dropna()
@@ -70,14 +74,17 @@ def statistical_test(illicit, licit, feature):
         licit_vals,
         alternative='two-sided')
 
-    # Cohen's d effect size
-    mean_diff  = illicit_vals.mean() - licit_vals.mean()
+    # Cohen's d with corrected pooled standard deviation
+    na = len(illicit_vals)
+    nb = len(licit_vals)
     pooled_std = np.sqrt(
-        (illicit_vals.std()**2 +
-         licit_vals.std()**2) / 2)
+        ((na - 1) * illicit_vals.std(ddof=1)**2 +
+         (nb - 1) * licit_vals.std(ddof=1)**2)
+        / (na + nb - 2))
 
-    cohens_d = abs(mean_diff / pooled_std) \
-               if pooled_std > 0 else 0
+    cohens_d = abs(
+        (illicit_vals.mean() - licit_vals.mean())
+        / pooled_std) if pooled_std > 0 else 0
 
     return p_value, cohens_d
 
@@ -247,7 +254,7 @@ print(f"Local features are stronger on average")
 print(f"(mean d = {local_mean_d:.3f} vs {aggregated_mean_d:.3f})")
 print(f"However top individual features are aggregated")
 print(f"feature_53 Cohen's d = "
-      f"{results_df.iloc[0]['cohens_d']:.3f} (very large)")
+      f"{results_df.iloc[0]['cohens_d']:.3f} (large effect)")
 print(f"Both feature types play complementary roles")
 
 
@@ -282,9 +289,9 @@ print(f"  141 of 165 features exhibit statistically")
 print(f"  significant differences between illicit and")
 print(f"  licit transactions. While feature_53 shows")
 print(f"  the strongest individual discrimination")
-print(f"  (Cohen's d = 1.162), local transaction")
-print(f"  features demonstrate higher average effect")
-print(f"  sizes (mean d = {local_mean_d:.3f} vs")
+print(f"  (Cohen's d = {results_df.iloc[0]['cohens_d']:.3f}),")
+print(f"  local transaction features demonstrate higher")
+print(f"  average effect sizes (mean d = {local_mean_d:.3f} vs")
 print(f"  {aggregated_mean_d:.3f} for aggregated features),")
 print(f"  suggesting complementary roles for both")
 print(f"  feature types in fraud detection.")
