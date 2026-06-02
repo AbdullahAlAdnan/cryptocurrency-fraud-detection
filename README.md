@@ -68,25 +68,25 @@ are required.
 
 Finding 3: 141 out of 165 features show statistically 
 significant differences between illicit and licit 
-transactions (p less than 0.05). However only 18 
+transactions (p less than 0.05). However only 9 
 features demonstrate strong practical separation 
 (Cohen's d above 0.5), confirming that statistical 
 significance alone is insufficient in large datasets 
 and effect size is the more meaningful measure.
 
 Finding 4: feature_53 is the strongest individual 
-discriminator (Cohen's d = 1.162, p less than 0.001). 
-However local transaction features demonstrate higher 
-average effect sizes across all features (mean d = 0.290 
-vs 0.186 for aggregated features), suggesting both 
-feature types play complementary roles in fraud 
-detection.
+discriminator (Cohen's d = 0.913, p less than 0.001, 
+large effect size). Local transaction features 
+demonstrate higher average effect sizes across all 
+features (mean d = 0.227 vs 0.159 for aggregated 
+features), suggesting both feature types play 
+complementary roles in fraud detection.
 
 Finding 5: All top 10 discriminative features show 
 negative mean values for illicit transactions and 
-positive mean values for licit transactions, consistent 
-with fraudulent wallet isolation behavior in the 
-Bitcoin network.
+positive mean values for licit transactions, 
+consistent with fraudulent wallet isolation behavior 
+in the Bitcoin network.
 
 Finding 6: The dataset contains zero missing values 
 and is clean and ready for machine learning without 
@@ -103,14 +103,14 @@ AUC-ROC and F1 score are required evaluation metrics.
 Mann-Whitney U tests confirm 141 of 165 features 
 show statistically significant differences 
 (p less than 0.05). Cohen's d effect size analysis 
-reveals only 18 features demonstrate strong practical 
-separation (d above 0.5), confirming that statistical 
-significance alone is insufficient in large datasets. 
-Local features show higher average effect sizes 
-(mean d = 0.290) than aggregated features 
-(mean d = 0.186), though top individual discriminators 
-are aggregated network features. All findings 
-independently verified using the complete dataset.
+using the corrected pooled standard deviation formula 
+reveals only 9 features demonstrate strong practical 
+separation (d above 0.5). Local features show higher 
+average effect sizes (mean d = 0.227) than aggregated 
+features (mean d = 0.159), though feature_53 remains 
+the strongest individual discriminator (d = 0.913). 
+All findings independently verified using the 
+complete dataset.
 
 ## Project Phases
 
