@@ -112,6 +112,18 @@ the strongest individual discriminator (d = 0.913).
 All findings independently verified using the 
 complete dataset.
 
+## Phase 2 Visualization
+
+![Phase 2 Overview](elliptic_bitcoin/figures/fig0_overview.png)
+
+| Figure | Finding |
+|--------|---------|
+| Fig 1 - Class Distribution | Findings 1 and 7: fraud rate 9.76%, class imbalance 9.2 to 1 |
+| Fig 2 - Fraud Rate Over Time | Finding 2: volatility 0.28% to 35.97%, mean 11.35%, peak step 13 |
+| Fig 3 - Top 15 Features | Findings 3 and 4: 9 of 165 features exceed d = 0.5, feature_53 strongest at d = 0.913 |
+| Fig 4 - KDE feature_53 | Finding 5: illicit mean -0.268 vs licit mean 0.995, wallet isolation behavior |
+| Fig 5 - Correlation Heatmap | Finding 3: complementary signal confirmed among top 15 features |
+
 ## Project Phases
 
 Phase 1 - Baseline analysis on IEEE-CIS dataset 
@@ -124,7 +136,7 @@ Phase 1 Extension - Statistical validation with
 Mann-Whitney U test and Cohen's d (completed)
 
 Phase 2 - Visualization and pattern analysis 
-(in progress)
+(completed)
 
 Phase 3 - Machine learning models including 
 Logistic Regression, Random Forest, and XGBoost 
