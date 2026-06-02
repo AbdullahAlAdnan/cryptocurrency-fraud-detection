@@ -69,37 +69,43 @@ print(f"Fraud rate:             {len(illicit)/len(labeled)*100:.2f}%")
 
 
 # Step 3 - Time Step Analysis
-# Finding 2: Fraud rate escalates over time
+# Finding 2: Fraud rate exhibits high temporal volatility
 
 print("\n" + "=" * 50)
 print("STEP 3 - TIME STEP ANALYSIS")
 print("=" * 50)
 
-# Raw counts per time step
-illicit_per_step = illicit.groupby(
-    'time_step')['txId'].count()
-
-# Normalized fraud rate per time step
+# Calculate fraud rate per time step
 time_counts = labeled.groupby(
     ['time_step', 'class']).size().unstack(
     fill_value=0).reset_index()
 
+time_counts.columns = ['time_step', 'illicit', 'licit']
 time_counts['fraud_rate'] = (
-    time_counts['1'] /
-    (time_counts['1'] + time_counts['2']) * 100)
+    time_counts['illicit'] /
+    (time_counts['illicit'] + time_counts['licit']) * 100)
 
-step1_count    = illicit_per_step.iloc[0]
-step49_count   = illicit_per_step.iloc[-1]
-step1_rate     = time_counts['fraud_rate'].iloc[0]
-step49_rate    = time_counts['fraud_rate'].iloc[-1]
+# Volatility statistics
+rate_min  = time_counts['fraud_rate'].min()
+rate_max  = time_counts['fraud_rate'].max()
+rate_mean = time_counts['fraud_rate'].mean()
+rate_std  = time_counts['fraud_rate'].std()
 
-print(f"Illicit count at step 1:    {step1_count}")
-print(f"Illicit count at step 49:   {step49_count}")
-print(f"Raw count change:           {step49_count/step1_count:.1f}x")
-print(f"\nNormalized fraud rate at step 1:  {step1_rate:.2f}%")
-print(f"Normalized fraud rate at step 49: {step49_rate:.2f}%")
-print(f"Normalized rate change:           "
-      f"{step49_rate/step1_rate:.1f}x")
+peak_step = time_counts.loc[
+    time_counts['fraud_rate'].idxmax(), 'time_step']
+min_step  = time_counts.loc[
+    time_counts['fraud_rate'].idxmin(), 'time_step']
+
+step1_rate  = time_counts['fraud_rate'].iloc[0]
+step49_rate = time_counts['fraud_rate'].iloc[-1]
+
+print(f"Fraud rate at step 1:   {step1_rate:.2f}%")
+print(f"Fraud rate at step 49:  {step49_rate:.2f}%")
+print(f"\nVolatility statistics across 49 time steps:")
+print(f"  Minimum rate:  {rate_min:.2f}% (step {int(min_step)})")
+print(f"  Maximum rate:  {rate_max:.2f}% (step {int(peak_step)})")
+print(f"  Mean rate:     {rate_mean:.2f}%")
+print(f"  Std deviation: {rate_std:.2f}%")
 
 
 # Step 4 - Feature Comparison (first 10 features)
@@ -210,9 +216,13 @@ print("Finding 1: Fraud rate is 9.76% among labeled transactions.")
 print("           This reflects fraud prevalence in transactions")
 print("           investigated by Elliptic analysts.")
 
-print("\nFinding 2: Normalized fraud rate increases 14.9x over time.")
-print("           From 0.79% at step 1 to 11.76% at step 49.")
-print("           Raw illicit count increases from 17 to 56.")
+print(f"\nFinding 2: Illicit transaction rates show high temporal")
+print(f"           volatility across 49 time steps.")
+print(f"           Range: {rate_min:.2f}% to {rate_max:.2f}%")
+print(f"           Mean: {rate_mean:.2f}%, Std: {rate_std:.2f}%")
+print(f"           Peak at step {int(peak_step)}, lowest at step {int(min_step)}.")
+print(f"           No stable baseline detected.")
+print(f"           Confirms need for continuous model retraining.")
 
 print("\nFinding 3: 141 out of 165 features show statistically")
 print("           significant differences between illicit and")
@@ -222,6 +232,9 @@ print("           Effect sizes vary from negligible to very large.")
 print("\nFinding 4: feature_53 is the strongest discriminator")
 print("           with a mean difference of 1.263 and")
 print("           Cohen's d of 1.162 (very large effect size).")
+print("           Local features stronger on average")
+print("           (mean d = 0.290 vs 0.186 aggregated).")
+print("           Both feature types play complementary roles.")
 
 print("\nFinding 5: All top 10 features show negative mean values")
 print("           for illicit transactions and positive mean values")
