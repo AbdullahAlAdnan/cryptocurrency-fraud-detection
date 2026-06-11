@@ -109,8 +109,11 @@ separation (d above 0.5). Local features show higher
 average effect sizes (mean d = 0.227) than aggregated 
 features (mean d = 0.159), though feature_53 remains 
 the strongest individual discriminator (d = 0.913). 
-All findings independently verified using the 
-complete dataset.
+To address the multiple comparisons problem, 
+Benjamini-Hochberg false discovery rate correction 
+was applied; all 141 significant features remained 
+significant after adjustment (q < 0.05). All findings 
+independently verified using the complete dataset.
 
 ## Phase 2 Visualization
 
